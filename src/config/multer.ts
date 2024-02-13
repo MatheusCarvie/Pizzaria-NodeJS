@@ -1,15 +1,19 @@
 import multer from "multer";
+import { randomBytes } from "crypto";
+
+export const filePath: string = "tmp";
 
 function Upload() {
-    const folderPath: string = "tmp";
     return multer.diskStorage({
-        destination: ((req, file, callback) => {
-            return callback(null, `${__dirname}/../../${folderPath}`);
-        }),
-        filename: ((req, file, callback) => {
-            return callback(null, `${Date.now()}-${file.originalname}`);
-        })
-    })
+        destination: (req, file, callback) => {
+            callback(null, `${__dirname}/../../${filePath}`);
+        },
+        filename: (req, file, callback) => {
+            const randomString = randomBytes(16).toString('hex');
+            const uniqueFileName = `${Date.now()}-${randomString}-${file.originalname}`;
+            callback(null, uniqueFileName);
+        }
+    });
 }
 
 export const UploadFile = multer({ storage: Upload() });
