@@ -7,6 +7,11 @@ import AddCategorysController from "./controllers/categorys/addCategoryControlle
 import ListCategoryController from "./controllers/categorys/listCategoryController";
 import AddProductController from "./controllers/products/addProductsController";
 import { UploadFile } from "./config/multer";
+import ListProductsController from "./controllers/products/listProductsController";
+import AddOrdersController from "./controllers/orders/addOrdersController";
+import RemoveOrderController from "./controllers/orders/removeOrderController";
+import AddItemController from "./controllers/items/addItemController";
+import RemoveItemController from "./controllers/items/removeItemController";
 
 const router = Router();
 
@@ -32,5 +37,24 @@ router.get("/category", IsAuthenticated, new ListCategoryController().handle);
 //#region Rotas de Produtos
 // Adiciona novos produtos
 router.post("/product", IsAuthenticated, UploadFile.single("file"), new AddProductController().handle);
+
+// Lista todos os produtos
+router.get("/product", IsAuthenticated, new ListProductsController().handle);
+//#endregion
+
+//#region Rotas dos Pedidos
+// Adiciona um novo pedido
+router.post("/orders", IsAuthenticated, new AddOrdersController().handle);
+
+// Remove um pedido
+router.delete("/orders", IsAuthenticated, new RemoveOrderController().handle);
+//#endregion
+
+//#region Rotas dos Itens
+// Adiciona um novo item
+router.post("/items", IsAuthenticated, new AddItemController().handle);
+
+// Remove um item
+router.delete("/items", IsAuthenticated, new RemoveItemController().handle);
 //#endregion
 export default router;
