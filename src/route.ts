@@ -12,6 +12,10 @@ import AddOrdersController from "./controllers/orders/addOrdersController";
 import RemoveOrderController from "./controllers/orders/removeOrderController";
 import AddItemController from "./controllers/items/addItemController";
 import RemoveItemController from "./controllers/items/removeItemController";
+import UpdateOrderController from "./controllers/orders/updateOrderController";
+import ListOrdersController from "./controllers/orders/listOrdersController";
+import DetailsOrderController from "./controllers/orders/detailsOrderController";
+import FinishOrderController from "./controllers/orders/finishOrderController";
 
 const router = Router();
 
@@ -48,6 +52,18 @@ router.post("/orders", IsAuthenticated, new AddOrdersController().handle);
 
 // Remove um pedido
 router.delete("/orders", IsAuthenticated, new RemoveOrderController().handle);
+
+// Editar um pedido
+router.put("/orders", IsAuthenticated, new UpdateOrderController().handle);
+
+// Lista todos os pedidos
+router.get("/orders", IsAuthenticated, new ListOrdersController().handle);
+
+// Da detalhes sobre um pedido
+router.get("/orders/details", IsAuthenticated, new DetailsOrderController().handle);
+
+// Finaliza um pedido
+router.put("/orders/finish", IsAuthenticated, new FinishOrderController().handle);
 //#endregion
 
 //#region Rotas dos Itens
