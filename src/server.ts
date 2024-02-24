@@ -21,4 +21,4 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
     return res.status(500).json({ status: "error", message: "Internal server error" });
 });
 
-app.listen(3000, () => console.log("Servidor iniciado"));
+app.listen(3001, () => console.log("Servidor iniciado"));

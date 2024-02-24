@@ -9,7 +9,7 @@ export type authServicesTypes = {
 
 class AuthServices {
     async execute({ email, password }: authServicesTypes) {
-        if (!email) throw new Error("Nome invalido");
+        if (!email) throw new Error("Email invalido");
         if (!password) throw new Error("Senha invalida");
 
         const user = await prismaClient.user.findFirst({
@@ -39,6 +39,7 @@ class AuthServices {
 
         return ({
             status: "Authenticated",
+            id: user.id,
             name: user.name,
             email: user.email,
             token: token
